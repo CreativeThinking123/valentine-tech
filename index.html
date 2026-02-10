@@ -43,6 +43,7 @@
     <canvas id="star-canvas"></canvas>
     <audio id="roseMusic" src="voice.mp3" preload="auto"></audio>
     <audio id="chocoMusic" src="choco.mp3" preload="auto"></audio>
+    <audio id="teddyMusic" src="https://raw.githubusercontent.com/CreativeThinking123/valentine-tech/main/orange.mp3" preload="auto"></audio>
     <div id="boot-screen"><div class="term-box" id="term"></div></div>
 
     <div id="challenge">
@@ -152,26 +153,20 @@
                 u.appendChild(node);
             });
         }
-
-        function showSurprise(item) {
-
+function showSurprise(item) {
     const rose = document.getElementById("roseMusic");
     const choco = document.getElementById("chocoMusic");
+    const teddy = document.getElementById("teddyMusic");
 
     // Stop all music first
     if (rose) { rose.pause(); rose.currentTime = 0; }
     if (choco) { choco.pause(); choco.currentTime = 0; }
+    if (teddy) { teddy.pause(); teddy.currentTime = 0; }
 
-    // 🌹 Rose Day music
-    if (item.n === "Rose Day") {
-        if (rose) rose.play().catch(()=>{});
-    }
-
-   // 💍 Propose Day music
-if (item.n === "Propose Day") {
-    if (choco) choco.play().catch(()=>{});
-}
-
+    // Play music based on the day name
+    if (item.n === "Rose Day" && rose) rose.play().catch(()=>{});
+    if (item.n === "Propose Day" && choco) choco.play().catch(()=>{});
+    if (item.n === "Teddy Day" && teddy) teddy.play().catch(()=>{});
 
     document.documentElement.style.setProperty('--theme', item.color);
     document.getElementById('m-title').innerText = item.n;
@@ -180,7 +175,7 @@ if (item.n === "Propose Day") {
     document.getElementById('m-stat').innerText = item.s;
 
     const img = document.getElementById('m-img');
-    if(item.img && item.img !== "PASTE_IMAGE_URL") {
+    if(item.img) {
         img.src = item.img;
         img.style.display = "block";
     } else {
@@ -191,15 +186,16 @@ if (item.n === "Propose Day") {
     confetti({particleCount: 100, colors: [item.color, '#ffffff']});
 }
 
-
-        function closeM() {
+function closeM() {
     document.getElementById('modal').style.display = 'none';
 
     const rose = document.getElementById("roseMusic");
     const choco = document.getElementById("chocoMusic");
+    const teddy = document.getElementById("teddyMusic");
 
     if (rose) { rose.pause(); rose.currentTime = 0; }
     if (choco) { choco.pause(); choco.currentTime = 0; }
+    if (teddy) { teddy.pause(); teddy.currentTime = 0; }
 }
 
 
